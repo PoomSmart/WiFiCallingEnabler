@@ -1,0 +1,10 @@
+Package: org.thebigboss.wificallingenabler
+Name: Wi-Fi Calling Enabler
+Pre-Depends: cy+model.iphone (= 4.1) | cy+model.iphone (= 5.1) | cy+model.iphone (= 5.2), firmware (>= 8.0)
+Depends: mobilesubstrate
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Wi-Fi Calling for iPhone 4s/5.
+Maintainer: PoomSmart
+Author: PoomSmart
+Section: Tweaks
