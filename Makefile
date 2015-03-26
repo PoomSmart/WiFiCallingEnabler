@@ -5,5 +5,6 @@ include theos/makefiles/common.mk
 
 TWEAK_NAME = WiFiCallingEnabler
 WiFiCallingEnabler_FILES = Tweak.xm
+WiFiCallingEnabler_PRIVATE_FRAMEWORKS = TelephonyUtilities
 
 include $(THEOS_MAKE_PATH)/tweak.mk

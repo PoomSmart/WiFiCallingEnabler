@@ -1,8 +1,34 @@
 #import <substrate.h>
 
+extern NSString *TUCallCapabilitiesEmergencyAddressKey;
+extern NSString *TUCallCapabilitiesStatusKey;
+extern NSString *TUCallCapabilitiesTermsAndConditionsKey;
+
 %group fw
 
+static NSDictionary *hook(NSDictionary *orig)
+{
+	NSMutableDictionary *dict = [orig mutableCopy];
+	NSMutableDictionary *add = [dict[TUCallCapabilitiesEmergencyAddressKey] mutableCopy];
+	add[TUCallCapabilitiesStatusKey] = @YES;
+	NSMutableDictionary *term = [dict[TUCallCapabilitiesStatusKey] mutableCopy];
+	term[TUCallCapabilitiesTermsAndConditionsKey] = @YES;
+	dict[TUCallCapabilitiesEmergencyAddressKey] = add;
+	dict[TUCallCapabilitiesStatusKey] = term;
+	return dict;
+}
+
 %hook TUCallCapabilities
+
++ (NSDictionary *)wiFiCallingCapabilityInformation
+{
+	return hook(%orig);
+}
+
++ (void)setWiFiCallingCapabilityInformation:(NSDictionary *)dict
+{
+	%orig(hook(dict));
+}
 
 + (BOOL)canEnableRelayCalling
 {
