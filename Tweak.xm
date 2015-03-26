@@ -1,3 +1,7 @@
+#import <substrate.h>
+
+%group fw
+
 %hook TUCallCapabilities
 
 + (BOOL)canEnableRelayCalling
@@ -32,8 +36,31 @@
 
 %end
 
+%end
+
+%group prefs
+
+%hook PHSettingsWiFiCallingController
+
+- (BOOL)_isAddressOnFile
+{
+	return YES;
+}
+
+- (BOOL)_isTermAndConditionsStatusOnFile
+{
+	return YES;
+}
+
+%end
+
+%end
+
 %ctor
 {
 	dlopen("/System/Library/PrivateFrameworks/TelephonyUtilities.framework/TelephonyUtilities", RTLD_LAZY);
-	%init;
+	%init(fw);
+	if ([NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.apple.Preferences"]) {
+		%init(prefs);
+	}
 }
