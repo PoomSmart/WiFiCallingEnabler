@@ -92,6 +92,7 @@ static NSDictionary *hook(NSDictionary *orig)
 	dlopen("/System/Library/PrivateFrameworks/TelephonyUtilities.framework/TelephonyUtilities", RTLD_LAZY);
 	%init(fw);
 	if ([NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.apple.Preferences"]) {
+		dlopen("/System/Library/PreferenceBundles/WiFiCallingSettingsBundle.bundle/WiFiCallingSettingsBundle", RTLD_LAZY);
 		%init(prefs);
 	}
 }

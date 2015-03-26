@@ -1,1 +1,1 @@
-{ Filter = { Bundles = ( "com.apple.UIKit" ); Executables = ( "callservicesd" ); Mode = "Any"; }; }
+{ Filter = { Bundles = ( "com.apple.UIKit", "com.apple.TelephonyUtilities" ); Executables = ( "callservicesd" ); Mode = "Any"; }; }
