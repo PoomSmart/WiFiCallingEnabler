@@ -30,6 +30,11 @@ static NSDictionary *hook(NSDictionary *orig)
 	%orig(hook(dict));
 }
 
++ (BOOL)supportsHostingTelephonyCalls
+{
+	return YES;
+}
+
 + (BOOL)canEnableRelayCalling
 {
 	return YES;
