@@ -9,12 +9,14 @@ extern NSString *TUCallCapabilitiesTermsAndConditionsKey;
 static NSDictionary *hook(NSDictionary *orig)
 {
 	NSMutableDictionary *dict = [[orig mutableCopy] autorelease];
-	NSMutableDictionary *add = [[dict[TUCallCapabilitiesEmergencyAddressKey] mutableCopy] autorelease];
+	NSMutableDictionary *add = [dict[TUCallCapabilitiesEmergencyAddressKey] mutableCopy];
 	add[TUCallCapabilitiesStatusKey] = @YES;
-	NSMutableDictionary *term = [[dict[TUCallCapabilitiesStatusKey] mutableCopy] autorelease];
+	NSMutableDictionary *term = [dict[TUCallCapabilitiesStatusKey] mutableCopy];
 	term[TUCallCapabilitiesTermsAndConditionsKey] = @YES;
 	dict[TUCallCapabilitiesEmergencyAddressKey] = add;
+	[add release];
 	dict[TUCallCapabilitiesStatusKey] = term;
+	[term release];
 	return dict;
 }
 
@@ -71,9 +73,9 @@ static NSDictionary *hook(NSDictionary *orig)
 
 %group prefs
 
-%hook PHSettingsWiFiCallingController
+/*%hook PHSettingsWiFiCallingController
 
-/*- (BOOL)_isAddressOnFile
+- (BOOL)_isAddressOnFile
 {
 	return YES;
 }
@@ -81,9 +83,9 @@ static NSDictionary *hook(NSDictionary *orig)
 - (BOOL)_isTermAndConditionsStatusOnFile
 {
 	return YES;
-}*/
+}
 
-%end
+%end*/
 
 %end
 
